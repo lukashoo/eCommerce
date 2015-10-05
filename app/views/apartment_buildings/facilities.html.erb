@@ -1,0 +1,18 @@
+<div class="container text-center">
+    <% @apartment_buildings.each do |a| %>
+        <h3> <%= a.short_name %></h3>
+
+            <% @apartment_types.each do |t| %>
+            <div class="column">
+            <h4><%= t.description %></h4>
+            <%= link_to 'Edytuj', facilities_path(:id_1 => a.id, :id_2 => t.id), { :class=>"btn btn-default" } %>
+
+            </div>
+            <% end %>
+
+
+
+    <% end %>
+
+
+</div>

@@ -1,0 +1,25 @@
+<div class="container">
+
+<h3><%= @apartment_building.full_name %></h3>
+	<div class="row vertical-align">
+        <div class="column .col-md-8">
+        <p>Budynek <%= @apartment_building.short_name %><br>
+        Pełen adres: <%= @apartment_building.address.town_city %>, <%= @apartment_building.address.street %>, <%= @apartment_building.address.zip_postcode %>, <%= @apartment_building.address.country %>.<br>
+        <%= @apartment_building.description %><br>
+        <%= @apartment_building.other %><br>
+
+        Menedżer <%= @apartment_building.manager %><br>
+        Telefon kontaktowy <%= @apartment_building.phone %>
+        </p>
+
+        <%= link_to 'Powrót', :back, { :class=>'btn btn-default' } %>
+        </div>
+
+        <div class="column .col-md-4">
+          <div class="apartment_image">
+          	IMAGE
+          </div> 
+        </div>
+	</div>
+
+</div>

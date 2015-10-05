@@ -1,0 +1,15 @@
+<div class="container">
+    
+  <div class="row" style="text-align: center">
+      <h3>Usługi</h3>
+      <div class="facilities">
+            <% @invoice.invoice_items.each do |f| %>
+              <p><strong><%= f.facility_description %>: </strong> [<%= f.prize_unit %>zł]<br> Ilość: <%= f.number_units %>
+            <% end %>
+      </div>
+
+      <%= link_to 'Powrót', :back, { :class=>'btn btn-default' } %>
+  </div>
+
+
+</div>

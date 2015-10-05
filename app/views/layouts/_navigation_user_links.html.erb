@@ -1,0 +1,9 @@
+<%# add navigation links to this file %>
+<% if current_user && current_user.user? %>
+	<li><%= link_to 'Wykaz faktur', my_invoices_path %></li>
+	<li><%= link_to 'Wykaz wpłat', my_payments_path %></li>
+	<li><%= link_to 'Niezapłacone faktury', unpaid_invoices_path %></li>
+<% elsif current_user && current_user.admin? %>
+	<li><%= link_to 'Wystaw fakturę', invoice_new_path %></li>
+	<li><%= link_to 'Kwoty usług', apt_bd_fac_path %></li>
+<% end %>

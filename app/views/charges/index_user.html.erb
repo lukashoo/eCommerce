@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+  <h3>Płatności</h3>
+    <table class="table">
+        <thead>
+          <th>Numer faktury</th>
+          <th>Data płatności</th>
+          <th>Kwota</th>
+        </thead>
+        <tbody>
+            <% @charges.each do |charge| %>
+              <tr>
+                <td><%= charge.invoice.number %></td>
+                <td><%= charge.date.strftime("%d-%m-%Y") %></td>
+                <td><%= number_with_precision charge.sum, :precision => 2 %>zł</td>
+              </tr>
+            <% end %>
+        </tbody>
+      </table>
+
+
+
+  </div>
+</div>

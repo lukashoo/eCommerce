@@ -1,0 +1,67 @@
+// Place all the styles related to the apartments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.facilities {
+	margin: 2px;
+	/*border: 1px dashed black;*/
+	padding-top: 10px;
+}
+
+.apartment.row {
+	margin: 5px 0px;
+	border: 1px inset black;
+	padding-top: 15px;
+}
+
+.vertical-align {
+    /*display: flex;
+    align-items: center;*/
+}
+
+.apartment_more {
+ cursor: pointer;
+
+}
+
+.nodisplay {
+	display: none;
+}
+
+.apartment_image {
+	max-width: 500px;
+	margin: auto;
+}
+.notice {
+	text-align: center;
+}
+
+
+
+.navbar a {
+-webkit-transition: color .25s;
+  -moz-transition: color .25s;
+  -ms-transition: color .25s;
+  -o-transition: color .25s;
+  transition: color .25s;
+}
+
+.navbar a:hover:before {
+    width: 100%;
+  }
+
+.navbar a:before {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    width: 0px;
+    background: #cccccc;
+    -webkit-transition: width .5s;
+    -moz-transition: width .5s;
+    -ms-transition: width .5s;
+    -o-transition: width .5s;
+    transition: width .5s;
+  }

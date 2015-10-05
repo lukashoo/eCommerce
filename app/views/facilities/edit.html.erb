@@ -1,0 +1,27 @@
+<div class="container">
+    
+  <% @facilities.each do |fac| %>
+    <div class="row">
+
+        <%= form_for fac, :html => { :role => "dorm" } do |f| %>
+  
+          <div class="form-group text-center">
+            <%= fac.description %>, kwota za jednostkę: 
+            <%= f.text_field :prize_unit, :value => (number_with_precision fac.prize_unit, :precision => 2), :size=>"4" %>zł
+            <%= f.submit 'Uaktualnij', :class => 'btn btn-default' %>
+          </div>
+
+
+
+
+        <% end %>
+
+    </div>
+  <% end %>
+  <div class="row text-center">
+  <%= link_to 'Powrót', :back, { :class=>'btn btn-default' } %>
+  </div>
+  
+
+
+</div>

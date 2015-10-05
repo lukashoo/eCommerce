@@ -1,0 +1,49 @@
+<div class="container">
+    
+
+  <%= form_for :invoice, url: invoices_path, :html => {:role => "form"} do |f| %>
+
+  <% if @invoice.errors.any? %>
+      <div id="error_explanation">
+        <h2>Wystąpiła następująca liczba błędów: <%=@invoice.errors.count%></h2>
+
+        <ul>
+        <% @invoice.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :"Id mieszkania: " %>
+    <%= f.number_field :apartment_id %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :"Nr faktury: " %>
+    <%= f.text_field :number %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :"Data płatności: " %>
+    <%= f.date_select :pay_date %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :"Dodatkowe pole: " %>
+    <%= f.text_field :additional_description %>
+  </div>
+  <div class="form-group">
+    <%= f.label :"Dodatkowa kwota: " %>
+    <%= f.text_field :additional_value %>zł
+  </div>
+
+      <div >
+        <%= f.submit 'Generuj', :class => 'btn btn-default' %>
+      </div>
+    
+  <% end %>
+
+
+</div>

@@ -1,0 +1,95 @@
+<div class="container">
+  <h2 style="text-align: center">Właściciel</h2>
+  <% if @apartments_o.first == nil %>
+        <p class="notice">Brak mieszkań</p>
+  <% else %>
+    <% @apartments_o.each do |apartment| %>
+      <div class="row apartment vertical-align">
+        <div class="column .col-md-8">
+          <p>Mieszkanie znajduje się w budynku <%= apartment.apartment_building.short_name %><br>Telefon kontaktowy <%= apartment.apartment_building.phone %>. <%= link_to 'Więcej danych', apartment_building_path(apartment.apartment_building)  %></p>
+          <h4>Dane mieszkania</h4>
+          <p><strong>Typ mieszkania: </strong><%= apartment.apartment_type.description %>
+          </p>
+          <p><strong>Pomieszczeń: </strong><%= apartment.room_count %>, w tym <%= apartment.bathroom_count %> łazienek i <%= apartment.bedroom_count %> sypialni.
+          </p>
+          <p><strong>Inne: </strong><%= apartment.other %>
+          </p>
+          <p><strong>Wynajem: </strong><br>
+              <% if apartment.user_id_2 != nil %>
+                <%= apartment.renter.name %> <%= apartment.renter.surname %><br> Identyfikator: <%= apartment.user_id_2 %>
+                <%= form_for(apartment) do |f| %>
+                  <%= f.hidden_field :user_id_2, :value => nil %>
+                  <%= f.submit 'Usuń', :class => 'button-xs' %>
+                <% end %>
+              <% else %>
+                <%= form_for(apartment) do |f| %>
+                  <%= f.number_field :user_id_2 %>
+                  <%= f.submit 'Dodaj', :class => 'button-xs' %>
+                <% end %>
+              <% end %>
+
+          </p>
+          <em class="apartment_more">Więcej</em><br>
+          <div class="facilities nodisplay">
+            <% apartment.apartment_facilities.each do |f| %>
+              <p><strong><%= f.facility.description %>: </strong> [<%= f.facility.prize_unit %>zł]<br> Ilość: <%= f.number_units %>
+            <% end %>
+          </div>
+        </div>
+        <div class="column .col-md-4">
+          <div class="apartment_image">
+          <%= image_tag apartment.image %>
+          </div>
+          
+        </div>
+
+      </div>
+     <% end %>
+
+  <% end %>
+
+
+
+
+
+  <h2 style="text-align: center">Wynajmowane</h2>
+  <% if @apartments_r.first == nil %>
+        <p class="notice">Brak mieszkań</p>
+  <% else %>
+    <% @apartments_r.each do |apartment| %>
+      <div class="row apartment vertical-align">
+        <div class="column .col-md-8">
+          <p>Mieszkanie znajduje się w budynku <%= apartment.apartment_building.short_name %><br>Telefon kontaktowy <%= apartment.apartment_building.phone %>. <%= link_to 'Więcej danych', apartment_building_path(apartment.apartment_building)  %></p>
+          <h4>Dane mieszkania</h4>
+          <p><strong>Typ mieszkania: </strong><%= apartment.apartment_type.description %>
+          </p>
+          <p><strong>Pomieszczeń: </strong><%= apartment.room_count %>, w tym <%= apartment.bathroom_count %> łazienek i <%= apartment.bedroom_count %> sypialni.
+          </p>
+          <p><strong>Inne: </strong><%= apartment.other %>
+          </p>
+          <p><strong>Właściciel: </strong><%= apartment.owner.name %> <%= apartment.owner.surname %>
+          </p>
+          <em class="apartment_more">Więcej</em><br>
+          <div class="facilities nodisplay">
+            <% apartment.apartment_facilities.each do |f| %>
+              <p><strong><%= f.facility.description %>: </strong> [<%= f.facility.prize_unit %>zł]<br> Ilość: <%= f.number_units %>
+            <% end %>
+          </div>
+        </div>
+        <div class="column .col-md-4">
+          <div class="apartment_image">
+          <%= image_tag apartment.image %>
+          </div>
+          
+        </div>
+
+      </div>
+     <% end %>
+
+  <% end %>
+
+
+ 
+
+
+</div>

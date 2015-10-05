@@ -1,0 +1,122 @@
+<div class="container">
+  
+  <h3>Właściciel</h3>
+    <% if @apartments_o.first == nil %>
+      <p class="notice">Brak mieszkań</p>
+    <% else %>
+      <% @apartments_o.each do |apartment| %>
+        <div class="row">
+        <h4><%= apartment.apartment_building.short_name %>: Mieszkanie <%= apartment.apt_number %>
+
+          <table class="table">
+            <thead>
+              <th>Numer faktury</th>
+              <th>Wystawiono</th>
+              <th>Data płatności</th>
+              <th>Kwota</th>
+              <th>Status</th>
+            </thead>
+
+
+            <tbody>
+                <% apartment.invoices.order(pay_date: :desc).each do |invoice| %>
+                  <tr>
+                    <td><%= invoice.number %></td>
+                    <td><%= invoice.date.strftime("%d-%m-%Y") %></td>
+                    <td><%= invoice.pay_date.strftime("%d-%m-%Y") %></td>
+                    <td><%= number_with_precision invoice.sum, :precision => 2 %>zł</td>
+                    <td><% if invoice.status == false %>
+                          Niezapłacono
+                        <% else %>
+                          Zapłacono
+                        <% end %>
+                    </td>
+                    <td><%= link_to 'Szczegóły', invoice_path(:id => invoice.id), { :class=>"button-xs" } %></td>
+                    <td><% if invoice.status == false %>
+                          
+                            <%= form_for @charge do |f|%>
+                                <%= hidden_field(:invoice, :id, :value => invoice.id) %>
+                                <%= hidden_field(:invoice, :user, :value => current_user.id) %>
+                                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                        data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                                        data-description=<%="#{invoice.number.to_s}"%>
+                                        data-amount=<%="#{((invoice.sum)*100).to_s}"%>
+                                        data-locale="auto"
+                                        data-currency="pln"
+                                        data-email=<%="#{current_user.email}"%>></script>
+                              <% end %>
+                            
+                        <% end %>
+                    </td>
+
+
+                  </tr>
+                <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+    <% end %>
+
+
+  <h3>Wynajmowane</h3>
+    <% if @apartments_r.first == nil %>
+      <p class="notice">Brak mieszkań</p>
+    <% else %>
+      <% @apartments_r.each do |apartment| %>
+        <div class="row">
+        <h4><%= apartment.apartment_building.short_name %>: Mieszkanie <%= apartment.apt_number %>
+
+          <table class="table">
+            <thead>
+              <th>Numer faktury</th>
+              <th>Wystawiono</th>
+              <th>Data płatności</th>
+              <th>Kwota</th>
+              <th>Status</th>
+            </thead>
+
+
+            <tbody>
+                <% apartment.invoices.order(pay_date: :desc).each do |invoice| %>
+                  <tr>
+                    <td><%= invoice.number %></td>
+                    <td><%= invoice.date.strftime("%d-%m-%Y") %></td>
+                    <td><%= invoice.pay_date.strftime("%d-%m-%Y") %></td>
+                    <td><%= number_with_precision invoice.sum, :precision => 2 %>zł</td>
+                    <td><% if invoice.status == false %>
+                          Niezapłacono
+                        <% else %>
+                          Zapłacono
+                        <% end %>
+                    </td>
+                    <td><% if invoice.status == false %>
+                          
+                            <%= form_for @charge do |f|%>
+                                <%= hidden_field(:invoice, :id, :value => invoice.id) %>
+                                <%= hidden_field(:invoice, :user, :value => current_user.id) %>
+                                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                        data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                                        data-description=<%="#{invoice.number.to_s}"%>
+                                        data-amount=<%="#{((invoice.sum)*100).to_s}"%>
+                                        data-locale="auto"
+                                        data-currency="pln"
+                                        data-email=<%="#{current_user.email}"%>></script>
+                              <% end %>
+                            
+                        <% end %>
+                    </td>
+                    <td><%= link_to 'Szczegóły', invoice_path(:id => invoice.id), { :class=>"button-xs" } %></td>
+
+
+                  </tr>
+                <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+    <% end %>
+
+
+
+</div>

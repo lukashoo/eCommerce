@@ -1,0 +1,7 @@
+pl:
+  date: #Throws an exception otherwise.
+    order:
+      - "year"
+      - "month"
+      - "day"
+    month_names: [~, Styczeń, Luty, Marzec, Kwiecień, Maj, Czerwiec, Lipiec, Sierpień, Wrzesień, Październik, Listopad, Grudzień]
